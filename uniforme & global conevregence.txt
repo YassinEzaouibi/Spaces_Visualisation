@@ -1,0 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Définition des données
+x = np.linspace(0, 1, 500)
+ns = [1, 5, 20, 50, 100]  # Différentes valeurs de n
+
+plt.figure(figsize=(10, 6))
+
+# Tracer les fonctions f_n(x) = x^n
+for n in ns:
+    y = x**n
+    plt.plot(x, y, label=f'n={n}')
+
+# Tracer la limite "théorique" (0 partout sauf en 1)
+plt.hlines(0, 0, 1, colors='black', linestyles='dashed', linewidth=2, label='Limite f(x)=0')
+
+# LE CONCEPT DE CVU : Le "Tube"
+# Imaginons un tube de largeur epsilon = 0.2 autour de 0
+plt.fill_between(x, -0.2, 0.2, color='gray', alpha=0.2, label='Tube (epsilon=0.2)')
+
+plt.title("Visualisation : Pourquoi x^n ne converge PAS Uniformément sur [0,1]")
+plt.xlabel("x")
+plt.ylabel("f_n(x)")
+plt.legend()
+plt.grid(True)
+
+# Annotation pour montrer le problème
+plt.annotate('Toujours hors du tube ici !', xy=(0.95, 0.6), xytext=(0.7, 0.8),
+             arrowprops=dict(facecolor='red', shrink=0.05))
+
+plt.show()
